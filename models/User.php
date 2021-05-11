@@ -12,6 +12,8 @@ use Yii;
  * @property string $password
  * @property string $authKey
  * @property string $accessToken
+ * @property string $join_date
+ * @property string $last_active
  *
  * @property Comment[] $comments
  * @property Post[] $posts
@@ -32,7 +34,8 @@ class User extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'password', 'authKey', 'accessToken'], 'required'],
+            [['username', 'password', 'authKey', 'accessToken', 'join_date'], 'required'],
+            [['join_date', 'last_active'], 'safe'],
             [['username'], 'string', 'max' => 16],
             [['password'], 'string', 'max' => 32],
             [['authKey', 'accessToken'], 'string', 'max' => 64],
@@ -50,10 +53,12 @@ class User extends \yii\db\ActiveRecord
             'password'    => 'Password',
             'authKey'     => 'Auth Key',
             'accessToken' => 'Access Token',
+            'join_date'   => 'Join Date',
+            'last_active' => 'Last Active',
         ];
     }
 
-    /**
+/**
      * {@inheritdoc}
      */
     public static function findIdentity($id)

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use dosamigos\datepicker\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\UserSearch */
@@ -16,14 +17,15 @@ use yii\widgets\ActiveForm;
     ]); ?>
 
     <?= $form->field($model, 'id') ?>
-
     <?= $form->field($model, 'username') ?>
-
     <?= $form->field($model, 'password') ?>
-
     <?= $form->field($model, 'authKey') ?>
-
     <?= $form->field($model, 'accessToken') ?>
+    <?= $form->field($model, 'join_date')->widget(DatePicker::className(), [
+        'inline' => true, 
+        'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
+        'clientOptions' => ['autoclose' => true, 'format' => 'yyyy-mm-dd']
+    ]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

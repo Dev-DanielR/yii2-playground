@@ -18,7 +18,7 @@ class CommentSearch extends Comment
     {
         return [
             [['id', 'post_id', 'user_id', 'active'], 'integer'],
-            [['content'], 'safe'],
+            [['content', 'publish_date'], 'safe'],
         ];
     }
 
@@ -61,10 +61,11 @@ class CommentSearch extends Comment
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id'      => $this->id,
-            'post_id' => $this->post_id,
-            'user_id' => $this->user_id,
-            'active'  => $this->active,
+            'id'           => $this->id,
+            'post_id'      => $this->post_id,
+            'user_id'      => $this->user_id,
+            'active'       => $this->active,
+            'publish_date' => $this->publish_date,
         ]);
 
         $query->andFilterWhere(['like', 'content', $this->content]);

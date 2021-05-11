@@ -121,7 +121,6 @@ class CommentController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
         return $this->redirect(['index']);
     }
 
@@ -137,7 +136,6 @@ class CommentController extends Controller
         if (($model = Comment::findOne($id)) !== null) {
             return $model;
         }
-
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

@@ -12,6 +12,7 @@ use Yii;
  * @property string $title
  * @property string $content
  * @property string $active
+ * @property string $publish_date
  *
  * @property Comment[] $comments
  * @property User $user
@@ -32,9 +33,10 @@ class Post extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'title', 'content', 'active'], 'required'],
+            [['user_id', 'title', 'content', 'active', 'publish_date'], 'required'],
             [['user_id'], 'integer'],
             [['content'], 'string'],
+            [['publish_date'], 'safe'],
             [['title'], 'string', 'max' => 45],
             [['active'], 'string', 'max' => 2],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
@@ -47,11 +49,12 @@ class Post extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'      => 'ID',
-            'user_id' => 'User ID',
-            'title'   => 'Title',
-            'content' => 'Content',
-            'active'  => 'Active',
+            'id'           => 'ID',
+            'user_id'      => 'User ID',
+            'title'        => 'Title',
+            'content'      => 'Content',
+            'active'       => 'Active',
+            'publish_date' => 'Publish Date',
         ];
     }
 

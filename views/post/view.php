@@ -9,7 +9,6 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\CommentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -38,6 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'content:ntext',
             'active',
+            'publish_date',
         ],
     ]) ?>
 

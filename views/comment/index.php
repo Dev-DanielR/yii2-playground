@@ -30,6 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'user_id',
             'content:ntext',
             'active',
+            'publish_date',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
