@@ -41,25 +41,17 @@ class CommentSearch extends Comment
     public function search($params)
     {
         $query = Comment::find();
-
-        // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
-            'query' => $query,
+            'query'      => $query,
+            'pagination' => ['pageSize' => 10],
         ]);
 
         $this->id      = isset($params['id']) ? $params['id'] : NULL;
         $this->post_id = isset($params['post_id']) ? $params['post_id'] : NULL;
         $this->user_id = isset($params['user_id']) ? $params['user_id'] : NULL;
         $this->active  = isset($params['active']) ? $params['active'] : NULL;
+        if (!$this->validate()) { return $dataProvider;}
 
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
-            return $dataProvider;
-        }
-
-        // grid filtering conditions
         $query->andFilterWhere([
             'id'           => $this->id,
             'post_id'      => $this->post_id,
@@ -67,7 +59,6 @@ class CommentSearch extends Comment
             'active'       => $this->active,
             'publish_date' => $this->publish_date,
         ]);
-
         $query->andFilterWhere(['like', 'content', $this->content]);
 
         return $dataProvider;

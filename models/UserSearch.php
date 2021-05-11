@@ -41,28 +41,19 @@ class UserSearch extends User
     public function search($params)
     {
         $query = User::find();
-
-        // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
-            'query' => $query,
+            'query'      => $query,
+            'pagination' => ['pageSize' => 10],
         ]);
 
         $this->load($params);
+        if (!$this->validate()) { return $dataProvider; }
 
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
-            return $dataProvider;
-        }
-
-        // grid filtering conditions
         $query->andFilterWhere([
             'id'          => $this->id,
             'join_date'   => $this->join_date,
             'last_active' => $this->last_active,
         ]);
-
         $query->andFilterWhere(['like', 'username', $this->username])
             ->andFilterWhere(['like', 'password', $this->password])
             ->andFilterWhere(['like', 'authKey', $this->authKey])
