@@ -13,10 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="comment-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Create Comment', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <p><?= Html::a('Create Comment', ['create'], ['class' => 'btn btn-success']) ?></p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -29,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'user_id',
             'content:ntext',
             'active',
-            'publish_date',
+            'publish_date:date',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

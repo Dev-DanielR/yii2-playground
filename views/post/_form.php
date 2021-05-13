@@ -22,8 +22,8 @@ $activeStates = array(1 => "Yes", 0 => "No");
     <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
     <?= $form->field($model, 'active')->dropDownList($activeStates, ['prompt' => 'Select...']) ?>
     <?= $form->field($model, 'publish_date')->widget(DatePicker::className(), [
-        'inline' => true, 
-        'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
+        'inline' => false,
+        'template' => '{addon}{input}',
         'clientOptions' => ['autoclose' => true, 'format' => 'yyyy-mm-dd']
     ]) ?>
 

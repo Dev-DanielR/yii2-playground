@@ -18,8 +18,8 @@ use dosamigos\datepicker\DatePicker;
     <?= $form->field($model, 'authKey')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'accessToken')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'join_date')->widget(DatePicker::className(), [
-        'inline' => true, 
-        'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
+        'inline' => false,
+        'template' => '{addon}{input}',
         'clientOptions' => ['autoclose' => true, 'format' => 'yyyy-mm-dd']
     ]) ?>
 

@@ -13,10 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="user-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <p><?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?></p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -26,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             'id',
             'username',
-            'join_date',
+            'join_date:date',
             'last_active',
             ['class' => 'yii\grid\ActionColumn'],
         ],
