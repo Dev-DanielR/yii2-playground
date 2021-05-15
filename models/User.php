@@ -9,7 +9,10 @@ use Yii;
  *
  * @property int $id
  * @property string $username
+ * @property string $email
  * @property string $password
+ * @property string $gender
+ * @property string $birthday
  * @property string $authKey
  * @property string $accessToken
  * @property string $join_date
@@ -34,10 +37,11 @@ class User extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'password', 'authKey', 'accessToken', 'join_date'], 'required'],
-            [['join_date', 'last_active'], 'safe'],
+            [['username', 'email', 'password', 'gender', 'birthday', 'authKey', 'accessToken', 'join_date' ], 'required'],
+            [['birthday', 'join_date', 'last_active'], 'safe'],
             [['username'], 'string', 'max' => 16],
-            [['password'], 'string', 'max' => 32],
+            [['email', 'password'], 'string', 'max' => 32],
+            [['gender'], 'string', 'max' => 1],
             [['authKey', 'accessToken'], 'string', 'max' => 64],
         ];
     }
@@ -50,74 +54,15 @@ class User extends \yii\db\ActiveRecord
         return [
             'id'          => 'ID',
             'username'    => 'Username',
+            'email'       => 'Email',
             'password'    => 'Password',
+            'gender'      => 'Gender',
+            'birthday'    => 'Birthday',
             'authKey'     => 'Auth Key',
             'accessToken' => 'Access Token',
             'join_date'   => 'Join Date',
             'last_active' => 'Last Active',
         ];
-    }
-
-/**
-     * {@inheritdoc}
-     */
-    public static function findIdentity($id)
-    {
-        return static::findOne($id);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function findIdentityByAccessToken($token, $type = null)
-    {
-        return static::findOne(['access_token' => $token]);
-    }
-
-    /**
-     * Finds user by username
-     *
-     * @param string $username
-     * @return static|null
-     */
-    public static function findByUsername($username)
-    {
-        return static::findOne(['username' => $username]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAuthKey()
-    {
-        return $this->authKey;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function validateAuthKey($authKey)
-    {
-        return $this->authKey === $authKey;
-    }
-
-    /**
-     * Validates password
-     *
-     * @param string $password password to validate
-     * @return bool if password provided is valid for current user
-     */
-    public function validatePassword($password)
-    {
-        return $this->password === $password;
     }
 
     /**

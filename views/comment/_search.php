@@ -7,6 +7,8 @@ use dosamigos\datepicker\DatePicker;
 /* @var $this yii\web\View */
 /* @var $model app\models\CommentSearch */
 /* @var $form yii\widgets\ActiveForm */
+
+$activeStates = array(1 => "Yes", 0 => "No");
 ?>
 
 <div class="comment-search">
@@ -20,7 +22,7 @@ use dosamigos\datepicker\DatePicker;
     <?= $form->field($model, 'post_id') ?>
     <?= $form->field($model, 'user_id') ?>
     <?= $form->field($model, 'content') ?>
-    <?= $form->field($model, 'active') ?>
+    <?= $form->field($model, 'active')->dropDownList($activeStates, ['prompt' => 'Select...']) ?>
     <?= $form->field($model, 'publish_date')->widget(DatePicker::className(), [
         'inline' => true, 
         'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
