@@ -4,11 +4,10 @@ namespace app\controllers;
 
 use Yii;
 use yii\data\SQLDataProvider;
+use yii\data\Pagination;
 use app\models\Comment;
 use app\models\CommentSearch;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 class StartController extends Controller
 {
@@ -23,6 +22,7 @@ class StartController extends Controller
         $total = Yii::$app->db
             ->createCommand('SELECT COUNT(p.id) FROM post p WHERE active = "1";')
             ->queryScalar();
+        $pagination = new Pagination(["totalCount"=> $total, "pageSize"=> StartController::INDEX_PAGE_SIZE]);
         $dataProvider = new SqlDataProvider([
             'sql' => 'SELECT p.id, p.title,
                             (SELECT username FROM user u WHERE u.id = p.user_id) as author,
@@ -35,7 +35,8 @@ class StartController extends Controller
         ]);
 
         return $this->render('index', [
-            'posts' => $dataProvider->getModels(),
+            'posts'      => $dataProvider->getModels(),
+            'pagination' => $pagination
         ]);
     }
 
@@ -46,6 +47,7 @@ class StartController extends Controller
         $total = Yii::$app->db
             ->createCommand('SELECT COUNT(c.id) FROM comment c WHERE active = "1" and post_id ="' . $id . '";')
             ->queryScalar();
+        $pagination = new Pagination(["totalCount"=> $total, "pageSize"=> StartController::INDEX_PAGE_SIZE]);
         $dataProvider = new SqlDataProvider([
             'sql' => 'SELECT c.id,
                             (SELECT username FROM user u WHERE u.id = c.user_id) as author,
@@ -58,7 +60,8 @@ class StartController extends Controller
         ]);
 
         return $this->render('comments', [
-            'comments' => $dataProvider->getModels(),
+            'comments'   => $dataProvider->getModels(),
+            'pagination' => $pagination
         ]);
     }
 }

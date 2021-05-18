@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\LinkPager;
 
 /* @var $this yii\web\View */
 
@@ -34,4 +35,5 @@ $this->params['breadcrumbs'][] = $this->title;
         </tbody>
     </table>
 
-</div
+    <?=LinkPager::widget(["pagination" => $pagination])?>
+</div>
